@@ -1,0 +1,23 @@
+{
+  "name": "d365-pcf-securityrolemanager",
+  "version": "1.0.0",
+  "description": "D365 - PCF - Security Role Manager",
+  "scripts": {
+    "build": "pcf-scripts build",
+    "clean": "pcf-scripts clean",
+    "rebuild": "pcf-scripts rebuild",
+    "start": "pcf-scripts start"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "@types/powerapps-component-framework": "^1.2.0",
+    "office-ui-fabric-react": "^7.107.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "pcf-scripts": "^1",
+    "pcf-start": "^1"
+  }
+}
