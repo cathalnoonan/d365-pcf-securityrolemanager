@@ -7,59 +7,38 @@ import { SecurityRoleService } from '../services';
 export interface IProps {
     securityRoleMap: SecurityRoleMap;
     securityRoleService: SecurityRoleService;
-    onProcessStart: () => void;
-    onProcessEnd: () => void;
-    disable: boolean;
+    disabled: boolean;
 }
 
-export default class Row extends React.Component<IProps, SecurityRoleMap> {
+export default function Row(props: IProps) {
+    const { securityRoleService, disabled } = props;
+    const [securityRoleMap, setSecurityRoleMap] = React.useState(props.securityRoleMap);
 
-    private securityRoleService: SecurityRoleService;
+    const stackProps: IStackProps = {
+        horizontal: true,
+    };
 
-    constructor(props: IProps) {
-        super(props);
-        this.securityRoleService = props.securityRoleService;
-        this.state = {
-            ...props.securityRoleMap,
-        };
-    }
+    const checkboxProps: ICheckboxProps = {
+        label: securityRoleMap.name,
+        checked: securityRoleMap.isAssigned,
+        onChange: async (ev?: React.FormEvent, checked?: boolean) => {
+            if (typeof checked === 'undefined') return;
 
-    render() {
-        const roleId = this.props.securityRoleMap.id;
-
-        const stackProps: IStackProps = {
-            horizontal: true,
-        };
-
-        const checkboxProps: ICheckboxProps = {
-            label: this.state.name,
-            checked: this.state.isAssigned,
-            onChange: async (ev: React.FormEvent | undefined, checked: boolean | undefined) => {
-                if (typeof checked === 'undefined') return;
-
-                // Start spinner
-                this.props.onProcessStart();
-
-                try {
-                    // Toggle role
-                    if (checked) {
-                        await this.securityRoleService.associateSecurityRole(roleId);
-                    } else {
-                        await this.securityRoleService.disassociateSecurityRoles(roleId);
-                    }
-
-                    this.setState({ isAssigned: !this.state.isAssigned });
-                } finally {
-                    // Stop spinner
-                    this.props.onProcessEnd();
+            try {
+                if (checked) {
+                    await securityRoleService.associateSecurityRole(securityRoleMap.id);
+                } else {
+                    await securityRoleService.disassociateSecurityRoles(securityRoleMap.id);
                 }
+                setSecurityRoleMap({ ...securityRoleMap, isAssigned: !securityRoleMap.isAssigned });
+            } finally {
             }
-        };
+        }
+    };
 
-        return (
-            <Stack {...stackProps}>
-                <Checkbox {...checkboxProps} disabled={this.props.disable} />
-            </Stack>
-        );
-    }
+    return (
+        <Stack {...stackProps}>
+            <Checkbox {...checkboxProps} disabled={disabled} />
+        </Stack>
+    );
 }

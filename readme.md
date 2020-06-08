@@ -23,10 +23,6 @@ A PCF control to manage security role assignment for a User or Team on the form 
 The roles are assigned/removed individually when the checkbox is changed
 - This is in near real-time as it uses the WebApi endpoint
 
-While an operation is in progress, a spinner will be shown at the top right of the control
-
-![Spinner location](./img/spinner.png)
-
 Until the operation has completed, the checkbox will not update
 - This is by design
 - The checkbox will be checked/unchecked when the update has completed

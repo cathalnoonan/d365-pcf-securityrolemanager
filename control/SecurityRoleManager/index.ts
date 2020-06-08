@@ -21,7 +21,7 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
             loadingMessage: getResourceString('Loading'),
             saveRecordMessage: getResourceString('SaveTheRecord'),
             unsupportedMessage: getResourceString('UnsupportedEntity'),
-            disable,
+            disabled: disable,
         };
 
         ReactDOM.render(

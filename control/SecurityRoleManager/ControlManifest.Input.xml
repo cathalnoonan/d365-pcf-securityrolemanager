@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
     <control namespace="Cathal" constructor="SecurityRoleManager" display-name-key="SecurityRoleManager" description-key="SecurityRoleManager_description" control-type="standard" preview-image="preview.png"
-        version="1.0.0">
+        version="1.0.1">
 
         <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type-group="any" usage="bound" required="true" />
 
@@ -24,28 +24,23 @@
             <type>Whole.None</type>
 
             <!--
-      <type>Whole.Duration</type>
-      <type>Whole.Timezone</type>
-      <type>Whole.Language</type>
-      <type>Lookup.Simple</type>
-      <type>Lookup.Customer</type>
-      <type>Lookup.Owner</type>
-      <type>Lookup.PartyList</type>
-      <type>Lookup.Regarding</type>
-      <type>MultiSelectOptionSet</type>
-      <type>Status</type>
-      <type>Status Reason</type>
-    -->
-
+            <type>Whole.Duration</type>
+            <type>Whole.Timezone</type>
+            <type>Whole.Language</type>
+            <type>Lookup.Simple</type>
+            <type>Lookup.Customer</type>
+            <type>Lookup.Owner</type>
+            <type>Lookup.PartyList</type>
+            <type>Lookup.Regarding</type>
+            <type>MultiSelectOptionSet</type>
+            <type>Status</type>
+            <type>Status Reason</type>
+            -->
         </type-group>
 
         <resources>
             <code path="index.ts" order="1"/>
             <resx path="strings/SecurityRoleManager.1033.resx" version="1.0.0" />
-
-            <!-- UNCOMMENT TO ADD MORE RESOURCES
-            <css path="css/SecurityRoleManager.css" order="1" />
-            -->
         </resources>
 
         <!-- UNCOMMENT TO ENABLE THE SPECIFIED API -->
