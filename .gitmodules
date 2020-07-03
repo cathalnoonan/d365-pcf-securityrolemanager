@@ -1,0 +1,3 @@
+[submodule "d365-pcf-common"]
+	path = d365-pcf-common
+	url = https://github.com/cathalnoonan/d365-pcf-common
