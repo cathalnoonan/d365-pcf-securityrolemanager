@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<Mapping>
+    <FileToFile map="WebResources\cn_\pcf\mit_license.html" to="..\..\..\..\d365-pcf-common\mit_license.html" />  
+    <FileToFile map="WebResources\cn_\pcf\solution.css" to="..\..\..\..\d365-pcf-common\solution.css" />  
+    <FileToFile map="WebResources\cn_\pcf\solution.js" to="..\..\..\..\d365-pcf-common\solution.js" />  
+    <FileToFile map="WebResources\cn_\pcf\securityrolemanager\banner.png" to="..\..\..\..\img\repo.png" />  
+</Mapping>
