@@ -1,40 +1,41 @@
-import { IInputs, IOutputs } from './generated/ManifestTypes';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { App, AppProps } from './components';
+import { IInputs, IOutputs } from './generated/ManifestTypes'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import { App, IAppProps } from './components'
+import { ResourceStrings } from './strings'
 
 export class SecurityRoleManager implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
-    private container: HTMLDivElement;
+    private container: HTMLDivElement
 
     public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement) {
-        this.container = container;
+        this.container = container
     }
 
     public updateView(context: ComponentFramework.Context<IInputs>): void {
-        const disable = context.mode.isControlDisabled;
 
-        const getResourceString = (name: string) => context.resources.getString(name);
+        const clientUrl = Xrm.Utility.getGlobalContext().getClientUrl()
+        const apiDataUrl = `${clientUrl}/api/data/v9.1`
 
-        const props: AppProps = {
-            headerText: getResourceString('SecurityRoles'),
-            loadingMessage: getResourceString('Loading'),
-            saveRecordMessage: getResourceString('SaveTheRecord'),
-            unsupportedMessage: getResourceString('UnsupportedEntity'),
-            disabled: disable,
-        };
+        const resourceStrings = new ResourceStrings((key: string) => context.resources.getString(key))
+
+        const props: IAppProps = {
+            apiDataUrl,
+            resourceStrings,
+            disabled: context.mode.isControlDisabled,
+        }
 
         ReactDOM.render(
             React.createElement(App, props),
             this.container
-        );
+        )
     }
 
     public getOutputs(): IOutputs {
-        return {};
+        return {}
     }
 
     public destroy(): void {
-        ReactDOM.unmountComponentAtNode(this.container);
+        ReactDOM.unmountComponentAtNode(this.container)
     }
 }
