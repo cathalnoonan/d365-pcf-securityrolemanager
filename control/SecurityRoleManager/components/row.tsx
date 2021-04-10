@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Checkbox, ICheckboxProps } from 'office-ui-fabric-react/lib/Checkbox'
-import { Stack, IStackProps } from 'office-ui-fabric-react/lib/Stack'
 import { SecurityRoleMap } from '../utilities'
 import { SecurityRoleService } from '../services'
+import { Checkbox, ICheckboxProps } from '@fluentui/react/lib/Checkbox'
+import { Stack, IStackProps } from '@fluentui/react/lib/Stack'
 
 export interface IRowProps {
     securityRoleMap: SecurityRoleMap

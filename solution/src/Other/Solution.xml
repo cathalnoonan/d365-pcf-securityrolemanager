@@ -8,7 +8,7 @@
       <LocalizedName description="Security Role Manager" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.1.0</Version>
+    <Version>1.0.3</Version>
     <!-- Solution Package Type: Unmanaged(0)/Managed(1)/Both(2)-->
     <Managed>2</Managed>
     <ConfigurationPage>cn_/pcf/securityrolemanager/index.html</ConfigurationPage>
@@ -96,6 +96,7 @@
       <RootComponent type="61" schemaName="cn_/pcf/solution.css" behavior="0" />
       <RootComponent type="61" schemaName="cn_/pcf/mit_license.html" behavior="0" />
     </RootComponents>
-    <MissingDependencies />
+    <MissingDependencies>
+    </MissingDependencies>
   </SolutionManifest>
 </ImportExportXml>

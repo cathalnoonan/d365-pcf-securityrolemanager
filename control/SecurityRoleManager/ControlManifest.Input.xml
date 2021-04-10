@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
     <control namespace="Cathal" constructor="SecurityRoleManager" display-name-key="SecurityRoleManager" description-key="SecurityRoleManager_description" control-type="standard" preview-image="preview.png"
-        version="1.0.1">
+        version="1.0.3">
 
         <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type-group="any" usage="bound" required="true" />
 
@@ -40,7 +40,7 @@
 
         <resources>
             <code path="index.ts" order="1"/>
-            <resx path="strings/SecurityRoleManager.1033.resx" version="1.0.0" />
+            <resx path="strings/SecurityRoleManager.1033.resx" version="1.0.3" />
         </resources>
 
         <!-- UNCOMMENT TO ENABLE THE SPECIFIED API -->

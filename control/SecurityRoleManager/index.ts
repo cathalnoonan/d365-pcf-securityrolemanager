@@ -15,7 +15,7 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
     public updateView(context: ComponentFramework.Context<IInputs>): void {
 
         const clientUrl = Xrm.Utility.getGlobalContext().getClientUrl()
-        const apiDataUrl = `${clientUrl}/api/data/v9.1`
+        const apiDataUrl = `${clientUrl}/api/data/v9.1/`
 
         const resourceStrings = new ResourceStrings((key: string) => context.resources.getString(key))
 
