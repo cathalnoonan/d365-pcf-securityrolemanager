@@ -18,7 +18,7 @@ export function App(props: IAppProps) {
 
     const { etn, id } = getEntityReference()
     const securityRoleService = new SecurityRoleService(apiDataUrl, etn, id)
-
+    
     const isSupportedEntity = (etn === 'systemuser' || etn === 'team')
     const isCreated = (!!id)
 

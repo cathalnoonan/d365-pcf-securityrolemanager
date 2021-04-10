@@ -18,7 +18,6 @@
 
   <PropertyGroup>
     <SolutionPackageType>Managed</SolutionPackageType>
-    <SolutionPackageMapFilePath>src\map.xml</SolutionPackageMapFilePath>
   </PropertyGroup>
  
   
