@@ -1,12 +1,12 @@
 {
   "name": "d365-pcf-securityrolemanager",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "D365 - PCF - Security Role Manager",
   "scripts": {
     "build": "pcf-scripts build",
     "clean": "pcf-scripts clean",
     "rebuild": "pcf-scripts rebuild",
-    "start": "pcf-scripts start"
+    "start": "pcf-scripts start watch"
   },
   "dependencies": {
     "@fluentui/react": "^8.9.4",

@@ -7,12 +7,12 @@ import { Stack, IStackProps } from '@fluentui/react/lib/Stack'
 export interface IRowProps {
     securityRoleMap: SecurityRoleMap
     securityRoleService: SecurityRoleService
-    disabled: boolean
 }
 
 export function Row(props: IRowProps) {
-    const { securityRoleService, disabled } = props
+    const { securityRoleService } = props
     const [securityRoleMap, setSecurityRoleMap] = React.useState(props.securityRoleMap)
+    const [processing, setProcessing] = React.useState(false)
 
     const stackProps: IStackProps = {
         horizontal: true,
@@ -25,20 +25,25 @@ export function Row(props: IRowProps) {
             if (typeof checked === 'undefined') return
 
             try {
+                setProcessing(true)
+
                 if (checked) {
                     await securityRoleService.associateSecurityRole(securityRoleMap.id)
                 } else {
                     await securityRoleService.disassociateSecurityRoles(securityRoleMap.id)
                 }
+
                 setSecurityRoleMap({ ...securityRoleMap, isAssigned: !securityRoleMap.isAssigned })
+
             } finally {
+                setProcessing(false)
             }
-        }
+        },
     }
 
     return (
         <Stack {...stackProps}>
-            <Checkbox {...checkboxProps} disabled={disabled} />
+            <Checkbox {...checkboxProps} disabled={processing} />
         </Stack>
     )
 }

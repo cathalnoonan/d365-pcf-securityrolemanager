@@ -1,24 +1,24 @@
 import * as React from 'react'
-import { Row } from './'
-import { ResourceStrings } from '../strings'
-import { SecurityRoleService } from '../services'
-import { SecurityRoleMap, getEntityReference } from '../utilities'
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner'
 import { Stack } from '@fluentui/react/lib/Stack'
 import { ScrollablePane } from '@fluentui/react/lib/ScrollablePane'
+import { Row } from './row'
+import { ResourceStrings } from '../strings'
+import { SecurityRoleService } from '../services'
+import { SecurityRoleMap } from '../utilities'
 
 export interface IAppProps {
     apiDataUrl: string
     resourceStrings: ResourceStrings
-    disabled: boolean
+    etn: string | null
+    id: string | null
 }
 
 export function App(props: IAppProps) {
-    const { apiDataUrl, resourceStrings, disabled } = props
+    const { apiDataUrl, resourceStrings, etn, id } = props
 
-    const { etn, id } = getEntityReference()
-    const securityRoleService = new SecurityRoleService(apiDataUrl, etn, id)
-    
+    const securityRoleService = new SecurityRoleService(apiDataUrl, etn!, id!)
+
     const isSupportedEntity = (etn === 'systemuser' || etn === 'team')
     const isCreated = (!!id)
 
@@ -28,14 +28,20 @@ export function App(props: IAppProps) {
 
     // ComponentDidMount
     React.useEffect(() => {
-        if (isSupportedEntity && isCreated) {
-            securityRoleService.getRoleMap()
-                .then((response: SecurityRoleMap[]) => setRoleMap(response))
-                .finally(() => setLoaded(true))
-        } else {
-            setLoaded(true)
+        async function getData() {
+            if (isSupportedEntity && isCreated) {
+                try {
+                    const response = await securityRoleService.getRoleMap()
+                    setRoleMap(response)
+                } finally {
+                    setLoaded(true)
+                }
+            } else {
+                setLoaded(true)
+            }
         }
-    }, [])
+        getData()
+    }, [isCreated])
 
     const hrStyle: React.CSSProperties = {
         backgroundColor: '#eee',
@@ -87,7 +93,6 @@ export function App(props: IAppProps) {
                         {roleMap.map(securityRoleMap =>
                             <Row
                                 securityRoleService={securityRoleService}
-                                disabled={disabled}
                                 key={securityRoleMap.id}
                                 securityRoleMap={securityRoleMap} />)}
                     </Stack>

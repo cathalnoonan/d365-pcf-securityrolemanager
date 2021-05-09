@@ -1,14 +1,18 @@
 import { IInputs, IOutputs } from './generated/ManifestTypes'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { App, IAppProps } from './components'
+import { App, IAppProps } from './components/app'
 import { ResourceStrings } from './strings'
 
 export class SecurityRoleManager implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
     private container: HTMLDivElement
 
-    public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement) {
+    public init(context: ComponentFramework.Context<IInputs>, 
+                notifyOutputChanged: () => void, 
+                state: ComponentFramework.Dictionary, 
+                container: HTMLDivElement) {
+        
         this.container = container
     }
 
@@ -22,7 +26,8 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
         const props: IAppProps = {
             apiDataUrl,
             resourceStrings,
-            disabled: context.mode.isControlDisabled,
+            etn: context.mode.contextInfo?.entityTypeName,
+            id: context.mode.contextInfo?.entityId,
         }
 
         ReactDOM.render(
