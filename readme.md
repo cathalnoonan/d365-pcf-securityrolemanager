@@ -2,7 +2,7 @@
 
 A PCF control to manage security role assignment for a User or Team on the form in Unified Interface
 
-![Sample image](./img/sample.png)
+![Sample image](./img/sample.gif)
 
 
 ## Installation and Configuration
