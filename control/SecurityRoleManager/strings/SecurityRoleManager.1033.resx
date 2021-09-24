@@ -87,5 +87,8 @@
     <data name="UnsupportedEntity" xml:space="preserve">
         <value>Unsupported entity. Roles can be associated with Users and Teams.</value>
     </data>
+    <data name="SearchPlaceholder" xml:space="preserve">
+        <value>Search...</value>
+    </data>
 
 </root>

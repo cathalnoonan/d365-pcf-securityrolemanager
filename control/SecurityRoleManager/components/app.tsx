@@ -26,6 +26,30 @@ export function App(props: IAppProps) {
     // setState
     const [loaded, setLoaded] = React.useState(false)
     const [roleMap, setRoleMap] = React.useState<SecurityRoleMap[]>([])
+    const [filteredRoleMap, setFilteredRoleMap] = React.useState<SecurityRoleMap[]>([])
+
+    function toggleSecurityRole(id: string) {
+        // Store into main set
+        const roleMapIndex = roleMap.findIndex(x => x.id === id)
+        const isAssigned = !roleMap[roleMapIndex].isAssigned
+        roleMap[roleMapIndex].isAssigned = isAssigned
+        setRoleMap(roleMap)
+
+        // Store into filtered set
+        const filteredRoleMapIndex = filteredRoleMap.findIndex(x => x.id === id)
+        if (filteredRoleMapIndex !== -1){   
+            filteredRoleMap[filteredRoleMapIndex].isAssigned = isAssigned
+            setFilteredRoleMap(filteredRoleMap)
+        }
+    }
+
+    function filter(text: string) {
+        if (text === '') {
+            setFilteredRoleMap(roleMap)
+        } else {
+            setFilteredRoleMap(roleMap.filter(x => x.name.toLocaleLowerCase().includes(text.toLocaleLowerCase())))
+        }
+    }
 
     // ComponentDidMount
     React.useEffect(() => {
@@ -34,6 +58,7 @@ export function App(props: IAppProps) {
                 try {
                     const response = await securityRoleService.getRoleMap()
                     setRoleMap(response)
+                    setFilteredRoleMap(response)
                 } finally {
                     setLoaded(true)
                 }
@@ -82,14 +107,24 @@ export function App(props: IAppProps) {
                 </h4>
             </div>
             <Hr />
+            <div style={{ marginBottom: '10px' }}>
+                <SearchBox
+                    placeholder={resourceStrings.SearchPlaceholder}
+                    onChange={e => filter(e?.currentTarget.value ?? '')}
+                />
+                <p>
+                    {/* <p>...</p> is here for spacing */}
+                </p>
+            </div>
             <div style={{ height: '400px', position: 'relative' }}>
                 <ScrollablePane>
                     <Stack tokens={{ childrenGap: 10 }}>
-                        {roleMap.map(securityRoleMap =>
+                        {filteredRoleMap.map(securityRoleMap =>
                             <Row
                                 securityRoleService={securityRoleService}
                                 key={securityRoleMap.id}
-                                securityRoleMap={securityRoleMap} />)}
+                                securityRoleMap={securityRoleMap}
+                                onChange={() => toggleSecurityRole(securityRoleMap.id)} />)}
                     </Stack>
                 </ScrollablePane>
             </div>

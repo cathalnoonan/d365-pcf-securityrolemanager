@@ -1,5 +1,7 @@
 export class ResourceStrings {
-    constructor (private getResourceString: (key: string) => string) {}
+    constructor (
+        private readonly getResourceString: (key: string) => string
+    ) {}
 
     get SecurityRoles(): string {
         return this.getResourceString("SecurityRoles")
@@ -15,5 +17,9 @@ export class ResourceStrings {
 
     get UnsupportedEntity(): string {
         return this.getResourceString("UnsupportedEntity")
+    }
+
+    get SearchPlaceholder(): string{
+        return this.getResourceString('SearchPlaceholder')
     }
 }
