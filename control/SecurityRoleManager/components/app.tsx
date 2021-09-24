@@ -6,6 +6,7 @@ import { Row } from './row'
 import { ResourceStrings } from '../strings'
 import { SecurityRoleService } from '../services'
 import { SecurityRoleMap } from '../utilities'
+import { SearchBox } from '@fluentui/react/lib/SearchBox'
 
 export interface IAppProps {
     apiDataUrl: string
@@ -17,7 +18,7 @@ export interface IAppProps {
 export function App(props: IAppProps) {
     const { apiDataUrl, resourceStrings, etn, id } = props
 
-    const securityRoleService = new SecurityRoleService(apiDataUrl, etn!, id!)
+    const securityRoleService = new SecurityRoleService(apiDataUrl, etn!, id!, props.resourceStrings)
 
     const isSupportedEntity = (etn === 'systemuser' || etn === 'team')
     const isCreated = (!!id)
@@ -43,17 +44,11 @@ export function App(props: IAppProps) {
         getData()
     }, [isCreated])
 
-    const hrStyle: React.CSSProperties = {
-        backgroundColor: '#eee',
-        height: '1px',
-        margin: '5px 0px',
-    }
-
     // Show spinner while loading
     if (!loaded) return (
         <div>
             <div>{resourceStrings.SecurityRoles}</div>
-            <hr style={hrStyle} />
+            <Hr />
             <div>
                 <Spinner size={SpinnerSize.large} label={resourceStrings.Loading} />
             </div>
@@ -64,7 +59,7 @@ export function App(props: IAppProps) {
     else if (!isSupportedEntity) return (
         <div>
             <div>{resourceStrings.SecurityRoles}</div>
-            <hr style={hrStyle} />
+            <Hr />
             <div>{resourceStrings.UnsupportedEntity}</div>
         </div>
     )
@@ -73,7 +68,7 @@ export function App(props: IAppProps) {
     else if (!isCreated) return (
         <div>
             <div>{resourceStrings.SecurityRoles}</div>
-            <hr style={hrStyle} />
+            <Hr />
             <div>{resourceStrings.SaveTheRecord}</div>
         </div>
     )
@@ -86,7 +81,7 @@ export function App(props: IAppProps) {
                     {resourceStrings.SecurityRoles}
                 </h4>
             </div>
-            <hr style={hrStyle} />
+            <Hr />
             <div style={{ height: '400px', position: 'relative' }}>
                 <ScrollablePane>
                     <Stack tokens={{ childrenGap: 10 }}>
@@ -101,4 +96,8 @@ export function App(props: IAppProps) {
         </div>
     )
 
+}
+
+function Hr() {
+    return <hr style={{ backgroundColor: '#eee', height: '1px', margin: '5px 0px' }} />
 }

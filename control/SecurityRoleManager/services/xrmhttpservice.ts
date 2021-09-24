@@ -1,6 +1,6 @@
 export class XrmHttpService {
-    constructor(
-        private apiUrl: string
+    constructor (
+        private readonly apiUrl: string
     ) {
         if (!this.apiUrl.endsWith('/')) this.apiUrl += '/'
     }

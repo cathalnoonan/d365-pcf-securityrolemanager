@@ -1,13 +1,15 @@
 import { XrmHttpService } from '.'
+import { ResourceStrings } from '../strings'
 import { mergeRoles } from '../utilities'
 
 export class SecurityRoleService {
-    private httpService: XrmHttpService
+    private readonly httpService: XrmHttpService
 
     constructor(
-        private apiDataUrl: string, 
-        private etn: string, 
-        private id: string
+        private readonly apiDataUrl: string, 
+        private readonly etn: string, 
+        private readonly id: string,
+        private readonly resourceStrings: ResourceStrings
     ) {
         this.httpService = new XrmHttpService(apiDataUrl)
     }
@@ -112,7 +114,7 @@ export class SecurityRoleService {
         if (this.etn === 'team') return 'teams'
 
         throw {
-            message: 'Unsupported entity'
+            message: this.resourceStrings.UnsupportedEntity
         }
     }
 
@@ -121,7 +123,7 @@ export class SecurityRoleService {
         if (this.etn === 'team') return 'teamroles'
 
         throw {
-            message: 'Unsupported entity'
+            message: this.resourceStrings.UnsupportedEntity
         }
     }
 
@@ -130,7 +132,7 @@ export class SecurityRoleService {
         if (this.etn === 'team') return 'teamroles_association'
 
         throw {
-            message: 'Unsupported entity'
+            message: this.resourceStrings.UnsupportedEntity
         }
     }
 
