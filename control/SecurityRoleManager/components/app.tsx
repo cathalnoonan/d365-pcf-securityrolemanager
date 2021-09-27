@@ -13,6 +13,7 @@ export interface IAppProps {
     resourceStrings: ResourceStrings
     etn: string | null
     id: string | null
+    businessUnitId: string | null
 }
 
 export function App(props: IAppProps) {

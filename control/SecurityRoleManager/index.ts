@@ -28,6 +28,7 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
             resourceStrings,
             etn: context.parameters.entityLogicalName.raw,
             id: context.parameters.entityId.raw,
+            businessUnitId: context.parameters.businessUnitId.raw[0].id,
         }
 
         ReactDOM.render(
