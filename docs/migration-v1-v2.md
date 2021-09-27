@@ -21,7 +21,7 @@ In the `Controls` tab, there will be additional options under the `Security Role
 - Entity Logical Name
 - Business Unit
 
-![Configuration properties added to the new version](./res/configuration-properties-businessunitid.png)
+![Configuration properties added to the new version](./res/configuration-properties.png)
 
 These three values need to be assigned a value for the control to function properly
 
