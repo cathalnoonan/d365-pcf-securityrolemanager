@@ -16,7 +16,8 @@ export interface IAppProps {
 }
 
 export function App(props: IAppProps) {
-    const { apiDataUrl, resourceStrings, etn, id } = props
+    const { apiDataUrl, resourceStrings, etn } = props
+    const id = props.id?.toString()
 
     const securityRoleService = new SecurityRoleService(apiDataUrl, etn!, id!, props.resourceStrings)
 

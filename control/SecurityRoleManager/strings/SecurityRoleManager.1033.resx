@@ -74,7 +74,19 @@
     </data>
     <data name="Property_Desc_Key" xml:space="preserve">
         <value>This value is not used by the control</value>
-    </data>    
+    </data>
+    <data name="entityId_Display_Key" xml:space="preserve">
+        <value>Entity ID</value>
+    </data>
+    <data name="entityId_Desc_Key" xml:space="preserve">
+        <value>Set this value to either "systemuserid" or "teamid" depending on which entity you are configuring.</value>
+    </data>
+    <data name="entityLogicalName_Display_Key" xml:space="preserve">
+        <value>Entity Logical Name</value>
+    </data>
+    <data name="entityLogicalName_Desc_Key" xml:space="preserve">
+        <value>Set this value to either "systemuser" or "team" depending on which entity you are configuring.</value>
+    </data>
     <data name="SecurityRoles" xml:space="preserve">
         <value>Security Roles</value>
     </data>

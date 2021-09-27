@@ -26,8 +26,8 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
         const props: IAppProps = {
             apiDataUrl,
             resourceStrings,
-            etn: context.mode.contextInfo?.entityTypeName,
-            id: context.mode.contextInfo?.entityId,
+            etn: context.parameters.entityLogicalName.raw,
+            id: context.parameters.entityId.raw,
         }
 
         ReactDOM.render(
