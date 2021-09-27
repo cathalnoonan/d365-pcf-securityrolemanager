@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { SecurityRoleMap } from '../utilities'
-import { SecurityRoleService } from '../services'
 import { Checkbox } from '@fluentui/react/lib/Checkbox'
 import { Stack } from '@fluentui/react/lib/Stack'
+import { SecurityRoleService } from '../data'
+import { SecurityRoleMap } from '../utilities'
 
 export interface IRowProps {
     securityRoleMap: SecurityRoleMap

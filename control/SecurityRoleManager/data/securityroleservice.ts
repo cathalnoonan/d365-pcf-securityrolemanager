@@ -1,25 +1,22 @@
-import { XrmHttpService } from '.'
 import { ResourceStrings } from '../strings'
-import { mergeRoles } from '../utilities'
+import { XrmHttpService, mergeRoles, retrieveAll } from '../utilities'
+import { SecurityRole } from '../models'
 
 export class SecurityRoleService {
-    private readonly httpService: XrmHttpService
-
     constructor(
-        private readonly apiDataUrl: string, 
-        private readonly etn: string, 
+        private readonly httpService: XrmHttpService,
+        private readonly apiDataUrl: string,
+        private readonly etn: string,
         private readonly id: string,
         private readonly resourceStrings: ResourceStrings
     ) {
-        this.httpService = new XrmHttpService(apiDataUrl)
     }
 
     public async getRoleMap() {
-        const businessUnitId = await this.getBusinessUnitId()
-        const businessUnitRoles = await this.retrieveRolesForBusinessUnit(businessUnitId)
-        const targetRoles = await this.retrieveRolesForTarget()
+        const roles = await this.retrieveAllRoles()
+        const assignedRoles = await this.retrieveAssignedRoles()
 
-        return mergeRoles(businessUnitRoles, targetRoles)
+        return mergeRoles(roles, assignedRoles)
     }
 
     public async associateSecurityRole(roleId: string): Promise<void> {
@@ -35,31 +32,26 @@ export class SecurityRoleService {
         await this.httpService.DELETE(url)
     }
 
-    private async getBusinessUnitId() {
-        const { id } = this
-        const url = `${this.getEntitySetName()}(${this.handleId(id)})?$select=_businessunitid_value`
-        const result = await this.httpService.GET(url)
-
-        return result._businessunitid_value
-    }
-
-    private async retrieveRolesForBusinessUnit(businessUnitId: string): Promise<SecurityRole[]> {
-        const url = `roles?$select=name,roleid&$filter=_businessunitid_value eq '${businessUnitId}'&$orderby=name asc`
-        const roles: any[] = (await this.httpService.GET(url)).value
+    private async retrieveAllRoles(): Promise<SecurityRole[]> {
+        const url = `roles?$select=name,roleid&$orderby=name asc&$expand=businessunitid($select=name,businessunitid)`
+        const roles: any[] = await retrieveAll(this.httpService, url)
 
         return roles.map(entity => ({
             id: entity.roleid,
-            name: entity.name,
+            name: `${entity.name} - ${entity.businessunitid.name}`,
+            businessUnitId: entity.businessunitid.businessunitid,
         }))
+        .sort((a, b) => a.name > b.name ? 1 : -1) // Ordering by the business unit name 
     }
 
-    private async retrieveRolesForTarget(): Promise<SecurityRole[]> {
+    private async retrieveAssignedRoles(): Promise<SecurityRole[]> {
         const url = this.createRetrieveUrlForTargetRoles()
-        const results = (await this.httpService.GET(url)).value
+        const results = await retrieveAll(this.httpService, url)
 
         return results.map((entity: any) => ({
             id: entity.roleid,
-            name: entity.name
+            name: entity.name,
+            businessUnitId: entity.businessunitid,
         }))
     }
 
@@ -71,6 +63,7 @@ export class SecurityRoleService {
             `<fetch version='1.0' distinct='true'>`,
             `<entity name='role'>`,
             `<attribute name='name' />`,
+            `<attribute name='businessunitid' />`,
             `<attribute name='roleid' />`,
             `<order attribute='name' descending='false' />`,
             `<link-entity name='${intersectEntityName}' from='roleid' to='roleid' visible='false' intersect='true'>`,
@@ -139,9 +132,4 @@ export class SecurityRoleService {
     private handleId(id: string): string {
         return id.replace('{', '').replace('}', '')
     }
-}
-
-export interface SecurityRole {
-    name: string
-    id: string
 }

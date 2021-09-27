@@ -23,12 +23,15 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
 
         const resourceStrings = new ResourceStrings((key: string) => context.resources.getString(key))
 
+        const businessUnit = context.parameters.businessUnitId.raw?.[0]
+
         const props: IAppProps = {
             apiDataUrl,
             resourceStrings,
             etn: context.parameters.entityLogicalName.raw,
-            id: context.parameters.entityId.raw,
-            businessUnitId: context.parameters.businessUnitId.raw[0].id,
+            id: context.parameters.entityId.raw?.toString() ?? null,
+            businessUnitId: businessUnit?.id,
+            businessUnitName: businessUnit?.name ?? null,
         }
 
         ReactDOM.render(

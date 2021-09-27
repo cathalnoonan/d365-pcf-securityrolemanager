@@ -1,4 +1,4 @@
-import { SecurityRole } from '../services'
+import { SecurityRole } from '../models'
 
 export function mergeRoles(allRoles: SecurityRole[], assignedRoles: SecurityRole[]): SecurityRoleMap[] {
     // List all potential roles as unassigned

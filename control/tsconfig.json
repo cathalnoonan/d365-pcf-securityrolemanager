@@ -3,6 +3,9 @@
     "compilerOptions": {
         "typeRoots": ["node_modules/@types"],
         "jsx": "react",
-        "sourceMap": true
+        "sourceMap": true,
+
+        "module": "es2015",
+        "moduleResolution": "node"
     }
 }

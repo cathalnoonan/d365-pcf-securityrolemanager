@@ -108,5 +108,14 @@
     <data name="SearchPlaceholder" xml:space="preserve">
         <value>Search...</value>
     </data>
+    <data name="Search" xml:space="preserve">
+        <value>Search</value>
+    </data>
+    <data name="CurrentBusinessUnit" xml:space="preserve">
+        <value>Current Business Unit</value>
+    </data>
+    <data name="OtherBusinessUnits" xml:space="preserve">
+        <value>Other Business Units</value>
+    </data>
 
 </root>

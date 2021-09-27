@@ -1,2 +1,2 @@
-export * from './xrmhttpservice'
+export * from './businessunitdata'
 export * from './securityroleservice'
