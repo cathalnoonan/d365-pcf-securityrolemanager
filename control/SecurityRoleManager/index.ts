@@ -17,9 +17,15 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
     }
 
     public updateView(context: ComponentFramework.Context<IInputs>): void {
-
-        const clientUrl = Xrm.Utility.getGlobalContext().getClientUrl()
+        
+        const globalContext = Xrm.Utility.getGlobalContext()
+        const clientUrl = globalContext.getClientUrl()
         const apiDataUrl = `${clientUrl}/api/data/v9.1/`
+
+        // `isOnPremise` is the function name in CrmOnline
+        // `isOnPremises` is the function name in CrmOnPremises
+        // @ts-ignore
+        const isCrmOnline = !( globalContext.isOnPremise?.() ?? globalContext.isOnPremises?.() )
 
         const resourceStrings = new ResourceStrings((key: string) => context.resources.getString(key))
 
@@ -32,16 +38,13 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
             id: context.parameters.entityId.raw?.toString() ?? null,
             businessUnitId: businessUnit?.id,
             businessUnitName: businessUnit?.name ?? null,
+            crossBusinessUnitAssignmentEnabled: isCrmOnline,
         }
 
         ReactDOM.render(
             React.createElement(App, props),
             this.container
         )
-    }
-
-    public getOutputs(): IOutputs {
-        return {}
     }
 
     public destroy(): void {

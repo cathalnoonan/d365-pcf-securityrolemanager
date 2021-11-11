@@ -8,7 +8,9 @@ export class SecurityRoleService {
         private readonly apiDataUrl: string,
         private readonly etn: string,
         private readonly id: string,
-        private readonly resourceStrings: ResourceStrings
+        private readonly resourceStrings: ResourceStrings,
+        private readonly crossBusinessUnitAssignmentEnabled: boolean,
+        private readonly businessUnitId: string
     ) {
     }
 
@@ -33,7 +35,10 @@ export class SecurityRoleService {
     }
 
     private async retrieveAllRoles(): Promise<SecurityRole[]> {
-        const url = `roles?$select=name,roleid&$orderby=name asc&$expand=businessunitid($select=name,businessunitid)`
+        let url = `roles?$select=name,roleid&$orderby=name asc&$expand=businessunitid($select=name,businessunitid)`
+        if (!this.crossBusinessUnitAssignmentEnabled)
+            url += `&$filter=_businessunitid_value eq '${this.businessUnitId}'`
+
         const roles: any[] = await retrieveAll(this.httpService, url)
 
         return roles.map(entity => ({

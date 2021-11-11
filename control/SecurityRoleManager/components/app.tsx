@@ -18,14 +18,23 @@ export interface IAppProps {
     id: string | null
     businessUnitId: string | null
     businessUnitName: string | null
+    crossBusinessUnitAssignmentEnabled: boolean
 }
 
 export function App(props: IAppProps) {
-    const { apiDataUrl, resourceStrings, etn } = props
+    const { apiDataUrl, resourceStrings, etn, crossBusinessUnitAssignmentEnabled, businessUnitId } = props
     const id = props.id?.toString()
 
     const xrmHttp = new XrmHttpService(apiDataUrl)
-    const securityRoleService = new SecurityRoleService(xrmHttp, apiDataUrl, etn!, id!, props.resourceStrings)
+    const securityRoleService = new SecurityRoleService(
+        xrmHttp, 
+        apiDataUrl, 
+        etn!, 
+        id!, 
+        props.resourceStrings, 
+        crossBusinessUnitAssignmentEnabled, 
+        businessUnitId!
+    )
 
     const isSupportedEntity = (etn === 'systemuser' || etn === 'team')
     const isCreated = (!!id)
@@ -129,6 +138,7 @@ export function App(props: IAppProps) {
                 <Label>
                     {resourceStrings.BusinessUnit}
                     <Dropdown
+                        disabled={!crossBusinessUnitAssignmentEnabled}
                         multiSelect={true}
                         onChange={(_, current) => {
                             if (selectedBusinessUnits.includes(current?.key! as string)) {
