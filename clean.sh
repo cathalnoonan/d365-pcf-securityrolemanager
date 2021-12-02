@@ -1,4 +1,6 @@
-#!/usr/bin/env zsh
+#!/bin/sh
+
+npx rimraf ./**/~
 
 npx rimraf ./control/node_modules
 npx rimraf ./control/obj
