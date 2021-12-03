@@ -1,4 +1,7 @@
 @echo off
 
-call npm --prefix ./control install
+cd ./control
+call npm install
+cd ..
+
 call dotnet build ./solution -c Release
