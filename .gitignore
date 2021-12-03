@@ -15,3 +15,5 @@ obj/
 
 **/~/
 .DS_Store
+
+dist/

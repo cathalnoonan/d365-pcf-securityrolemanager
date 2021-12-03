@@ -19,9 +19,10 @@
   <PropertyGroup>
     <SolutionRootPath>src</SolutionRootPath>
     <SolutionPackageType>Both</SolutionPackageType>
-    <SolutionPackageZipFilePath>bin\$(Configuration)\$(Name).zip</SolutionPackageZipFilePath>
+    <SolutionPackageZipFilePath>..\dist\$(Name).zip</SolutionPackageZipFilePath>
   </PropertyGroup>
  
+  <Import Project=".\solution.msbuild.targets" />
   
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.*" />

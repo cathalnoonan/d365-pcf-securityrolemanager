@@ -1,0 +1,25 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- 
+    MSBuild target to find the version number from ./solution/src/Other/Solution.xml.
+    We will use this in the zip name of the solution(s) being built.
+  -->
+  <Target Name="IncludeVersionNumberInSolutionZipName" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <!-- Find the solution file relative to the '.cdsproj' file. -->
+      <_SolutionXmlFilePath>$(MSBuildProjectDirectory)\$(SolutionRootPath)\Other\Solution.xml</_SolutionXmlFilePath>
+      <_SolutionVersionXPath>/ImportExportXml/SolutionManifest/Version/text()</_SolutionVersionXPath>
+    </PropertyGroup>
+    <XmlPeek XmlInputPath="$(_SolutionXmlFilePath)" Query="$(_SolutionVersionXPath)">
+      <Output TaskParameter="Result" ItemName="_TempSolutionVersionNumber" />
+    </XmlPeek>
+    <PropertyGroup>
+      <_SolutionVersionNumber>@(_TempSolutionVersionNumber)</_SolutionVersionNumber>
+      <_SolutionVersionNumberFormatted>$([System.Text.RegularExpressions.Regex]::Replace($(_SolutionVersionNumber),"\.", "_"))</_SolutionVersionNumberFormatted>
+      
+      <!-- Append the version number to the output solution name. -->
+      <SolutionPackageZipFilePath>$(SolutionPackageZipFilePath.Replace(".zip","_$(_SolutionVersionNumberFormatted).zip"))</SolutionPackageZipFilePath>
+    </PropertyGroup>
+  </Target>
+
+</Project>
