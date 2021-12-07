@@ -29,7 +29,7 @@ These three values need to be assigned a value for the control to function prope
   - This field should be bound to the primary key field of the entity; i.e. `systemuserid` or `teamid`
 - Entity Logical Name
   - This field should either be a hard-coded reference to the entity name, i.e. `"systemuser"` or `"team"`\
-  or else bound to the `entitylogicalname` field
+  use this instead of selecting the `bind to field` option
 - Business Unit
   - Select the `businessunitid` lookup field
   
