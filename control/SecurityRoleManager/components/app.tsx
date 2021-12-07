@@ -72,7 +72,7 @@ export function App(props: IAppProps) {
                 rolesForSelectedBusinessUnits.filter(x => x.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()))
             )
         }
-    }, [loaded, businessUnits, selectedBusinessUnits, searchText])
+    }, [roleMap, loaded, businessUnits, selectedBusinessUnits, searchText])
 
     // Load the data required for the component
     React.useEffect(() => {
