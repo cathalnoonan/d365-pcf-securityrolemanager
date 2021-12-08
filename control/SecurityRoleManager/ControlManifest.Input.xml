@@ -16,7 +16,9 @@
             <type>Decimal</type>
             <type>Enum</type>
             <type>FP</type>
+            <type>Lookup.Simple</type>
             <type>Multiple</type>
+            <type>MultiSelectOptionSet</type>
             <type>OptionSet</type>
             <type>SingleLine.Email</type>
             <type>SingleLine.Phone</type>
@@ -31,12 +33,10 @@
             <type>Whole.Duration</type>
             <type>Whole.Timezone</type>
             <type>Whole.Language</type>
-            <type>Lookup.Simple</type>
             <type>Lookup.Customer</type>
             <type>Lookup.Owner</type>
             <type>Lookup.PartyList</type>
             <type>Lookup.Regarding</type>
-            <type>MultiSelectOptionSet</type>
             <type>Status</type>
             <type>Status Reason</type>
             -->
@@ -44,7 +44,7 @@
 
         <resources>
             <code path="index.ts" order="1"/>
-            <resx path="strings/SecurityRoleManager.1033.resx" version="1.2.0" />
+            <resx path="strings/SecurityRoleManager.1033.resx" version="2.0.0" />
         </resources>
 
         <!-- UNCOMMENT TO ENABLE THE SPECIFIED API -->
