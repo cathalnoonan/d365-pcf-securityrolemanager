@@ -1,38 +1,40 @@
 # Migration from V1 to V2
 
-Please read these notes before deploying the V2 solution of this component
+Please read these notes before deploying the V2 solution of this component.
 
-V2 adds the option to assign roles from multiple business units
+V2 adds the option to assign roles from multiple business units.
 
-> **Note:** This functionality seems to only work with the online version of D365
->
-> If you are using this control in an on-premises deployment, **please stay on V1.x**
+> **Note:** \
+> This functionality will only work with the online version of D365.
 
 ---
 
 ## Additional Configuration Required
 
-After importing the solution from the [releases page](https://github.com/cathalnoonan/d365-pcf-securityrolemanager), open the form(s) where the field is already added
+After importing the solution from the [Releases page](https://github.com/cathalnoonan/d365-pcf-securityrolemanager), open the form(s) where the control is used from the classic interface.
 
-Select and double-click the control that has the control added
+Select and double-click the control containing the Security Role Manager control to edit the properties.
 
-In the `Controls` tab, there will be additional options under the `Security Role Manager` control
+In the `Controls` tab, there will be additional options under the `Security Role Manager` control.
+
+These three properties need to be assigned a value for the control to function properly
+
 - Entity ID
 - Entity Logical Name
 - Business Unit
 
 ![Configuration properties added to the new version](./res/configuration-properties.png)
 
-These three values need to be assigned a value for the control to function properly
-
 - Entity ID
   - This field should be bound to the primary key field of the entity; i.e. `systemuserid` or `teamid`
+  ![Entity ID](./res/configuration-properties-entityid.png)
 - Entity Logical Name
-  - This field should either be a hard-coded reference to the entity name, i.e. `"systemuser"` or `"team"`\
-  use this instead of selecting the `bind to field` option
+  - Select the `Bind to a static value` option.
+  - Type `systemuser` or `team`.
+  ![Entity Logical Name](./res/configuration-properties-entitylogicalname.png)
 - Business Unit
   - Select the `businessunitid` lookup field
-  
-When configuring the `Business Unit` field, there is an option to enable view searching - uncheck this
+  ![Business Unit](./res/configuration-properties-businessunit.png)
 
-![Disable properties when configuring business unit input](./res/configuration-properties-businessunitid.png)
+Save, Publish, Refresh the form.
+![Save, Publish, Refresh the form](./res/configuration-save-publish.png)
