@@ -5,6 +5,7 @@
     "entityid",
     "entitylogicalname",
     "securityrolemanager",
+    "solutionimport",
     "systemuserid",
     "teamid"
   ]
