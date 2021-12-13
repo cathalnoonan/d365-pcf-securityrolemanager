@@ -22,4 +22,16 @@
     </PropertyGroup>
   </Target>
 
+  <!--
+    Build process will not include "_managed" in the solution zip file if only the managed solution is built.
+    We will include "_managed" in the solution zip name.
+  -->
+  <Target Name="IncludeManagedInSolutionZipName" AfterTargets="IncludeVersionNumberInSolutionZipName" 
+          Condition=" '$(SolutionPackageType)' == 'Managed' ">
+    <PropertyGroup>
+      <!-- Append "_managed" to the output solution name. -->
+      <SolutionPackageZipFilePath>$(SolutionPackageZipFilePath.Replace(".zip","_managed.zip"))</SolutionPackageZipFilePath>
+    </PropertyGroup>
+  </Target>
+
 </Project>

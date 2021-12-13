@@ -18,11 +18,15 @@
   
   <PropertyGroup>
     <SolutionRootPath>src</SolutionRootPath>
-    <SolutionPackageType>Both</SolutionPackageType>
+    <SolutionPackageType>Managed</SolutionPackageType>
+
+    <!-- 
+      Set the output to the 'dist' folder.
+      Use this method rather than setting the working folder, so that only the zip file(s) is/are put in that folder.
+      This will be amended using 'directory.build.targets' to append the version number and "_managed".
+    -->
     <SolutionPackageZipFilePath>..\dist\$(Name).zip</SolutionPackageZipFilePath>
   </PropertyGroup>
- 
-  <Import Project=".\solution.msbuild.targets" />
   
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.*" />

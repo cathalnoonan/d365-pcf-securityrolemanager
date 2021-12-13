@@ -10,7 +10,7 @@
     <Descriptions />
     <Version>2.0.0</Version>
     <!-- Solution Package Type: Unmanaged(0)/Managed(1)/Both(2)-->
-    <Managed>2</Managed>
+    <Managed>1</Managed>
     <Publisher>
       <!-- Unique Publisher Name of Cds Solution -->
       <UniqueName>cathal</UniqueName>
