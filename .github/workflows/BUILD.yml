@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Configure environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      # Build the project
+      - name: Call build script
+        run: ./build.sh
+
+      # Prepare artifact(s)
+      - name: Get solution name
+        id: get-solution-name
+        run: echo "::set-output name=SOLUTION_NAME::$(basename $(find ./dist -type f -iname "*") .zip)"
+      - name: 'Upload artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.get-solution-name.outputs.SOLUTION_NAME }}
+          path: ./dist/${{ steps.get-solution-name.outputs.SOLUTION_NAME }}.zip
+          retention-days: 5
