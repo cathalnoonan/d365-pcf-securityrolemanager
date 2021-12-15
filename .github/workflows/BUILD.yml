@@ -40,4 +40,4 @@ jobs:
         with:
           name: ${{ steps.get-solution-name.outputs.SOLUTION_NAME }}
           path: ./dist/${{ steps.get-solution-name.outputs.SOLUTION_NAME }}.zip
-          retention-days: 5
+          retention-days: 30
