@@ -1,10 +1,12 @@
 name: Build
 
 on:
-  push:
+  workflow_dispatch:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
 
 jobs:
   build_ubuntu:
@@ -38,4 +40,4 @@ jobs:
         with:
           name: ${{ steps.get-solution-name.outputs.SOLUTION_NAME }}
           path: ./dist/${{ steps.get-solution-name.outputs.SOLUTION_NAME }}.zip
-          retention-days: 2
+          retention-days: 5
