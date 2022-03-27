@@ -2,11 +2,20 @@
   "cSpell.words": [
     "businessunit",
     "businessunitid",
+    "businessunits",
     "entityid",
     "entitylogicalname",
+    "isdisabled",
+    "mergeroles",
+    "resourcestrings",
+    "retrieveall",
+    "roleid",
     "securityrolemanager",
     "solutionimport",
     "systemuserid",
-    "teamid"
+    "systemuserroles",
+    "teamid",
+    "teamroles",
+    "xrmhttpservice"
   ]
 }
