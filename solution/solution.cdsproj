@@ -8,7 +8,6 @@
   <Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props')" />
 
   <PropertyGroup>
-    <Name>SecurityRoleManager</Name>
     <ProjectGuid>94950d75-5ce8-4f94-b73f-eded4ec5d712</ProjectGuid>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <!--Remove TargetFramework when this is available in 16.1-->
@@ -18,14 +17,6 @@
   
   <PropertyGroup>
     <SolutionRootPath>src</SolutionRootPath>
-    <SolutionPackageType>Managed</SolutionPackageType>
-
-    <!-- 
-      Set the output to the 'dist' folder.
-      Use this method rather than setting the working folder, so that only the zip file(s) is/are put in that folder.
-      This will be amended using 'directory.build.targets' to append the version number and "_managed".
-    -->
-    <SolutionPackageZipFilePath>..\dist\$(Name).zip</SolutionPackageZipFilePath>
   </PropertyGroup>
   
   <ItemGroup>

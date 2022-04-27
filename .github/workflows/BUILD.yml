@@ -3,8 +3,10 @@ name: Build
 on:
   workflow_dispatch:
     branches: [ main ]
-  # push:
-  #   branches: [ main ]
+  push:
+    branches:
+    - main
+    - features/*
   # pull_request:
   #   branches: [ main ]
 
@@ -15,29 +17,29 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Configure environment
-      - name: Setup Node.js
+      - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version-file: '.nvmrc'
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 6.0.x
 
       # Build the project
       - name: Call build script
         run: ./build.sh
 
       # Prepare artifact(s)
-      - name: Get solution name
-        id: get-solution-name
-        run: echo "::set-output name=SOLUTION_NAME::$(basename $(find ./dist -type f -iname "*") .zip)"
+      # - Create an arbitrary file in the root of the dist directory.
+      #   This is to avoid the artifacts zip auto extracting when double clicked.
+      - run: echo "${{ github.server_url }}/${{ github.repository }}" > ./dist/repo-url.txt
       - name: 'Upload artifact'
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.get-solution-name.outputs.SOLUTION_NAME }}
-          path: ./dist/${{ steps.get-solution-name.outputs.SOLUTION_NAME }}.zip
-          retention-days: 30
+          name: ${{ github.event.repository.name }}__extract_this_zip
+          path: ./dist/*
+          retention-days: 15

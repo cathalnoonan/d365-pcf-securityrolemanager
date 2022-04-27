@@ -1,3 +1,3 @@
 @echo off
 
-call npx rimraf ./**/node_modules ./**/bin ./**/obj ./**/out ./**/dist
+call npx rimraf ./**/node_modules ./**/bin ./**/obj ./**/out
