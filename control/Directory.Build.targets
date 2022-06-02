@@ -1,0 +1,12 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--
+    MSBuild target to restore packages from npm.
+    This avoids needing to install the packages manually as part of the build.
+  -->
+  <Target Name="RestoreNpm" BeforeTargets="PrepareForBuild">
+    <Exec Command="npm install --no-audit" />
+    <Exec Command="npm audit --prod" />
+  </Target>
+
+</Project>
