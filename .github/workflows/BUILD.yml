@@ -7,8 +7,6 @@ on:
     branches:
     - main
     - features/*
-  # pull_request:
-  #   branches: [ main ]
 
 jobs:
   build_ubuntu:
@@ -29,16 +27,25 @@ jobs:
         with:
           dotnet-version: 6.0.x
 
-      # Build the project
-      - name: Call build script
-        run: ./build.sh
+      # Restore dependencies
+      # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md
+      - run: npm install --no-audit --ignore-scripts --no-fund
+        working-directory: ./control
+      - run: npm audit --prod
+        working-directory: ./control
+
+      # Build solution
+      - run: dotnet build -c Release
+        working-directory: ./solution
+        env:
+          DOTNET_ROLL_FORWARD: Major
 
       # Prepare artifact(s)
       # - Create an arbitrary file in the root of the dist directory.
-      #   This is to avoid the artifacts zip auto extracting when double clicked.
+      # - This is to try and make it clearer that there is a nested zip inside the artifact zip file.
       - run: echo "${{ github.server_url }}/${{ github.repository }}" > ./dist/repo-url.txt
       - name: 'Upload artifact'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.event.repository.name }}__extract_this_zip
           path: ./dist/*
