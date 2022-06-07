@@ -9,8 +9,15 @@ on:
     - features/*
 
 jobs:
-  build_ubuntu:
-    runs-on: ubuntu-latest
+  build:
+    strategy:
+      matrix:
+        # Specify the operating system(s) that the build will run on
+        os: 
+        - ubuntu-latest
+        #- windows-latest
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       # Checkout code
@@ -22,6 +29,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: control/package-lock.json
       - name: Setup dotnet
         uses: actions/setup-dotnet@v2
         with:
@@ -35,10 +44,14 @@ jobs:
         working-directory: ./control
 
       # Build solution
+      # - https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables
       - run: dotnet build -c Release
         working-directory: ./solution
         env:
           DOTNET_ROLL_FORWARD: Major
+          DOTNET_NOLOGO: 1
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
 
       # Prepare artifact(s)
       # - Create an arbitrary file in the root of the dist directory.
