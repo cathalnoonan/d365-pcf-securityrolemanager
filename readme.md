@@ -1,5 +1,7 @@
 # D365 PCF - Security Role Manager
 
+[![Build](https://github.com/cathalnoonan/d365-pcf-securityrolemanager/actions/workflows/BUILD.yml/badge.svg)](https://github.com/cathalnoonan/d365-pcf-securityrolemanager/actions/workflows/BUILD.yml)
+
 A PCF control to manage security role assignment for a User or Team on the form in Unified Interface
 
 ![Sample image](./docs/res/sample.gif)
