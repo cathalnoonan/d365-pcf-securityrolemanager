@@ -4,23 +4,11 @@ on:
   workflow_dispatch:
     branches: [ main ]
   push:
-    branches:
-    - main
-    - features/*
   pull_request:
-    branches:
-      - main
 
 jobs:
   build:
-    strategy:
-      matrix:
-        # Specify the operating system(s) that the build will run on
-        os: 
-        - ubuntu-latest
-        #- windows-latest
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout code
@@ -29,13 +17,13 @@ jobs:
 
       # Configure environment
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: control/package-lock.json
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
