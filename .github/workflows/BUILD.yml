@@ -11,21 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Configure environment
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: control/package-lock.json
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 6.0.x
+      - uses: actions/setup-dotnet@v3
 
       # Restore dependencies
       # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md
