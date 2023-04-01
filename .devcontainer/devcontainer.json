@@ -25,8 +25,8 @@
         "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/control/node_modules,type=volume"
     ],
     "forwardPorts": [ 8181 ],
+    "initializeCommand": "sudo chown -R $USER:$USER ./",
 
     // Install node_modules
-    "onCreateCommand": "sudo chown -R $USER:$USER ./control/node_modules/",
     "postCreateCommand": "npm install --prefix ./control --no-audit --ignore-scripts --no-fund"
 }
