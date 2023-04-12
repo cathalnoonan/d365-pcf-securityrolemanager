@@ -19,17 +19,9 @@ jobs:
           cache-dependency-path: control/package-lock.json
       - uses: actions/setup-dotnet@v3
 
-      # Restore dependencies
-      # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md
-      - run: npm install --no-audit --ignore-scripts --no-fund
-        working-directory: ./control
-      - run: npm audit --prod
-        working-directory: ./control
-
       # Build solution
       # - https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables
-      - run: dotnet build -c Release
-        working-directory: ./solution
+      - run: dotnet build
         env:
           DOTNET_ROLL_FORWARD: Major
           DOTNET_NOLOGO: 1

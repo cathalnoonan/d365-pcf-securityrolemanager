@@ -25,5 +25,5 @@
         "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/control/node_modules,type=volume"
     ],
     "forwardPorts": [ 8181 ],
-    "initializeCommand": "sudo chown -R $USER:$USER ./"
+    "postCreateCommand": "sudo chown -R $USER:$USER ./ && dotnet restore"
 }
