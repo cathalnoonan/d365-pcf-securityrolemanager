@@ -1,14 +1,21 @@
 version: 2
+
 updates:
 
-  - package-ecosystem: "npm"
-    directory: "/**"
-    schedule:
-      interval: "weekly"
-    allow:
-      - dependency-type: "production"
-
   - package-ecosystem: "github-actions"
+    commit-message:
+      prefix: "[github-actions] "
     directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "main"
+
+  - package-ecosystem: "npm"
+    allow:
+      - dependency-type: "production"
+    commit-message:
+      prefix: "[npm] "
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
