@@ -1,0 +1,18 @@
+<Project DefaultTargets="Build">
+    <Target Name="Restore">
+        <Exec Command="npm install --no-audit --ignore-scripts --no-fund"
+              WorkingDirectory="$(MSBuildThisFileDirectory)/control" />
+        <Exec Command="npm audit --prod"
+              WorkingDirectory="$(MSBuildThisFileDirectory)/control" />
+    </Target>
+
+    <Target Name="Build" DependsOnTargets="Restore">
+        <Exec Command="dotnet build ./solution -c Release"
+              WorkingDirectory="$(MSBuildThisFileDirectory)" />
+    </Target>
+
+    <Target Name="Clean">
+        <Exec Command="git clean -ffdX"
+              WorkingDirectory="$(MSBuildThisFileDirectory)" />
+    </Target>
+</Project>
