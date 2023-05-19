@@ -1,14 +1,23 @@
 <Project DefaultTargets="Build">
     <Target Name="Restore">
+        <ItemGroup>
+            <ProjectFiles Include="**/*.*proj" Exclude="*.proj" />
+        </ItemGroup>
         <Exec Command="npm install --no-audit --ignore-scripts --no-fund"
               WorkingDirectory="$(MSBuildThisFileDirectory)/control" />
-        <Exec Command="npm audit --prod"
+        <Exec Command="npm audit --omit=dev"
               WorkingDirectory="$(MSBuildThisFileDirectory)/control" />
+        <MSBuild Targets="Restore"
+                 Projects="@(ProjectFiles)" />
     </Target>
 
-    <Target Name="Build" DependsOnTargets="Restore">
-        <Exec Command="dotnet build ./solution -c Release"
-              WorkingDirectory="$(MSBuildThisFileDirectory)" />
+    <Target Name="Build">
+        <ItemGroup>
+            <PacSolutionFiles Include="**/*.cdsproj" />
+        </ItemGroup>
+        <MSBuild Targets="Build"
+                 Properties="Configuration=Release"
+                 Projects="@(PacSolutionFiles)" />
     </Target>
 
     <Target Name="Clean">
