@@ -1,1 +1,2 @@
-<Project Sdk="Cathal.PcfTools.Proj/1.0.0" DefaultTargets="Build" />
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Cathal.PcfTools.MSBuild.Proj/0.1.1" />
