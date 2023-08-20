@@ -1,1 +1,6 @@
 * eol=lf
+
+# Binary files.
+*.png binary
+*.jpg binary
+*.git binary
