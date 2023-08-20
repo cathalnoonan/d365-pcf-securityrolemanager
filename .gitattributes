@@ -1,6 +1,8 @@
-* eol=lf
+# Set line endings for text files
+* text=auto eol=lf
 
 # Binary files.
 *.png binary
 *.jpg binary
-*.git binary
+*.jpeg binary
+*.gif binary
