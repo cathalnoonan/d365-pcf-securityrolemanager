@@ -1,9 +1,11 @@
 {
   "extends": "./node_modules/pcf-scripts/tsconfig_base.json",
   "compilerOptions": {
-      "typeRoots": ["node_modules/@types"],
-      "jsx": "react",
-      "sourceMap": true,
-      "esModuleInterop": true
+    "typeRoots": ["node_modules/@types"],
+    "jsx": "react",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "target": "ES2015",
+    "lib": ["dom", "es5", "scripthost", "es2015.promise"]
   }
 }

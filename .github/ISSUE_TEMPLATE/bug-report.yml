@@ -1,0 +1,37 @@
+name: Bug report
+description: Describe the issue and include steps to reproduce.
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Describe how to reproduce the issue.
+        Include any observations about what causes the issue to happen.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: |
+        Please include screenshots or gifs of the issue occurring.
+        Remember to hide any sensitive information included in the images.
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: Version installed
+    validations:
+      required: true
