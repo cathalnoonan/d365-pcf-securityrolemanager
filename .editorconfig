@@ -1,0 +1,16 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+root = true
+
+[*]
+indent_size = 2
+indent_style = space
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+
+[*.ts, *.json, *.yml]
+insert_final_newline = true
+
+[*.*proj, *.resx, *.xml]
+insert_final_newline = false

@@ -8,16 +8,11 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
 
     private container: HTMLDivElement
 
-    public init(context: ComponentFramework.Context<IInputs>, 
-                notifyOutputChanged: () => void, 
-                state: ComponentFramework.Dictionary, 
-                container: HTMLDivElement) {
-        
+    public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement) {
         this.container = container
     }
 
     public updateView(context: ComponentFramework.Context<IInputs>): void {
-        
         const globalContext = Xrm.Utility.getGlobalContext()
         const clientUrl = globalContext.getClientUrl()
         const apiDataUrl = `${clientUrl}/api/data/v9.1/`

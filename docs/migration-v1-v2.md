@@ -33,7 +33,7 @@ These three properties need to be assigned a value for the control to function p
 
 ### Entity ID
 - This field should be bound to the primary key field of the entity; i.e. `systemuserid` or `teamid`
- ![Entity ID](./res/configuration-properties-entityid.png)
+  ![Entity ID](./res/configuration-properties-entityid.png)
 
 ### Entity Logical Name
 - Select the `Bind to a static value` option.

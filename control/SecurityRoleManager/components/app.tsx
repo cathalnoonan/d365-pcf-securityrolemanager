@@ -27,12 +27,12 @@ export function App(props: IAppProps) {
 
     const xrmHttp = new XrmHttpService(apiDataUrl)
     const securityRoleService = new SecurityRoleService(
-        xrmHttp, 
-        apiDataUrl, 
-        etn!, 
-        id!, 
-        props.resourceStrings, 
-        crossBusinessUnitAssignmentEnabled, 
+        xrmHttp,
+        apiDataUrl,
+        etn!,
+        id!,
+        props.resourceStrings,
+        crossBusinessUnitAssignmentEnabled,
         businessUnitId!
     )
 

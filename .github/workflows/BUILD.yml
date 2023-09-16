@@ -65,3 +65,18 @@ jobs:
             fi
           done
         shell: bash
+
+  validate-editor-config:
+    name: Validate editor config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - name: Setup editorconfig-checker
+        run: npm i -g editorconfig-checker
+      - name: Run editorconfig-checker
+        run: editorconfig-checker

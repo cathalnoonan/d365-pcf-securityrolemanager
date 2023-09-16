@@ -20,19 +20,19 @@ export class XrmHttpService {
     private async executeRequest(method: string, partialUrl: string, data?: any): Promise<any | void> {
         return new Promise((resolve, reject) => {
             // Check if the request is already a full url.. then leave it as is.
-            const url = 
+            const url =
                 partialUrl.startsWith('http') ? partialUrl
                 : this.apiUrl + '/' + partialUrl
 
             const xhr = new XMLHttpRequest()
             xhr.open(method, url, true)
-            
+
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.setRequestHeader('Accept', 'application/json')
             xhr.setRequestHeader('OData-MaxVersion', '4.0')
             xhr.setRequestHeader('OData-Version', '4.0')
             xhr.setRequestHeader('Prefer', 'Microsoft.Dynamics.CRM.formattedvalue')
-            
+
             xhr.onload = () => {
                 if (xhr.status < 200 || xhr.status >= 300) {
                     reject({
@@ -47,7 +47,7 @@ export class XrmHttpService {
                     resolve(void 0)
                 }
             }
-            
+
             xhr.onerror = () => {
                 reject({
                     message: xhr.statusText,
@@ -55,7 +55,7 @@ export class XrmHttpService {
                     details: xhr.response,
                 })
             }
-            
+
             if (data) xhr.send(JSON.stringify(data))
             else xhr.send()
         })

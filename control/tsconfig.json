@@ -5,7 +5,7 @@
     "jsx": "react",
     "sourceMap": true,
     "esModuleInterop": true,
-    "target": "ES2015",
-    "lib": ["dom", "es5", "scripthost", "es2015.promise"]
+    "target": "ES2017",
+    "lib": ["dom", "ES2017"]
   }
 }

@@ -1,5 +1,6 @@
 name: Bug report
 description: Describe the issue and include steps to reproduce.
+labels: [ "bug" ]
 body:
   - type: textarea
     id: description

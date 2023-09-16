@@ -9,5 +9,5 @@ module.exports = {
 
   // Use "ES5" to support older browsers.
   // IE11 is end of support, so this shouldn't be necessary anymore.
-  target: ['web', 'es2015'],
+  target: ['web', 'es2017'],
 }

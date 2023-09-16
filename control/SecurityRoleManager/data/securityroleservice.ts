@@ -46,7 +46,7 @@ export class SecurityRoleService {
             name: `${entity.name} - ${entity.businessunitid.name}`,
             businessUnitId: entity.businessunitid.businessunitid,
         }))
-        .sort((a, b) => a.name > b.name ? 1 : -1) // Ordering by the business unit name 
+        .sort((a, b) => a.name > b.name ? 1 : -1) // Ordering by the business unit name
     }
 
     private async retrieveAssignedRoles(): Promise<SecurityRole[]> {
