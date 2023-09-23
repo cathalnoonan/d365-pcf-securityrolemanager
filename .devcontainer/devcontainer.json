@@ -1,29 +1,28 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:18-bullseye",
-    "features": {
-        "ghcr.io/devcontainers/features/dotnet:1": {
-            "version": "6"
-        }
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "eamodio.gitlens",
-                "editorconfig.editorconfig",
-                "streetsidesoftware.code-spell-checker"
-            ]
-        }
-    },
-    "remoteEnv": {
-        "DOTNET_NOLOGO": "1",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "6.0"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "remoteEnv": {
+    "DOTNET_NOLOGO": "1",
 
-        // https://github.com/microsoft/powerplatform-vscode/issues/139
-        "DOTNET_ROLL_FORWARD": "Major"
-    },
-    "mounts": [
-        // Mount a volume for the node_modules, it improves performance significantly
-        "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/control/node_modules,type=volume"
-    ],
-    "forwardPorts": [ 8181 ],
-    "postCreateCommand": "sudo chown -R $USER:$USER ./ && dotnet restore"
+    // https://github.com/microsoft/powerplatform-vscode/issues/139
+    "DOTNET_ROLL_FORWARD": "Major"
+  },
+  "mounts": [
+    // Mount a volume for the node_modules, it improves performance significantly
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/control/node_modules,type=volume"
+  ],
+  "forwardPorts": [8181]
 }
