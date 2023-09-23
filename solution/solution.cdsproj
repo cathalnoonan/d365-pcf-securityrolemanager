@@ -17,7 +17,7 @@
     <SolutionRootPath>src</SolutionRootPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.14.4" />
+    <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.27.5" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
