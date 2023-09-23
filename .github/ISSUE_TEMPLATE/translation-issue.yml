@@ -1,5 +1,5 @@
-name: Missing translations
-description: Request translations for another language.
+name: Translation issue
+description: Request a fix for a translation.
 labels: [ "translation" ]
 body:
   - type: input
@@ -14,3 +14,9 @@ body:
       label: Language code (LCID)
     validations:
       required: false
+  - type: textarea
+    id: translation-issue
+    attributes:
+      label: Describe the issue
+    validations:
+      required: true
