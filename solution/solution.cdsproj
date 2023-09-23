@@ -15,6 +15,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SolutionRootPath>src</SolutionRootPath>
+    <SolutionPackageMapFilePath>$(MSBuildThisFileDirectory)\src\map.xml</SolutionPackageMapFilePath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.27.5" />

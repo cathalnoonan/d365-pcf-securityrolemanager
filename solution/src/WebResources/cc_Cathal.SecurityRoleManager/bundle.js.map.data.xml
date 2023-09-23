@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{1fe007cf-a0e3-4c64-0006-0c4c34000001}</WebResourceId>
+  <Name>cc_Cathal.SecurityRoleManager/bundle.js.map</Name>
+  <DisplayName>bundle.js.map</DisplayName>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>2.0.2</IntroducedVersion>
+  <IsEnabledForMobileClient>1</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>1</IsAvailableForMobileOffline>
+  <DependencyXml>&lt;Dependencies&gt;&lt;Dependency componentType="WebResource"/&gt;&lt;/Dependencies&gt;</DependencyXml>
+  <IsCustomizable>0</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/cc_Cathal.SecurityRoleManager/bundle.js.map</FileName>
+</WebResource>
