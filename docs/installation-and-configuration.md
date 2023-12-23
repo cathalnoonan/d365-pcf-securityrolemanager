@@ -45,5 +45,15 @@
     - BusinessUnit:
       - Select the `businessunitid` field
       ![Business Unit](./res/configuration-properties-businessunit.png)
+    - RoleNamesFilter (optional, added in `v2.1.0`):
+      - If you would like to filter the list of roles that are shown on the form, enter the names of roles to be shown.
+      - Select `Bind to a static value`, type each security role name on a new line.
+      - **Note: The names must match with security role names. If roles are renamed elsewhere, they must be updated here also.**
+      ![Role Names Filter](./res/configuration-properties-rolenamesfilter.png)
 - Save, Publish, Refresh the form.
 ![Save, Publish, Refresh the form](./res/configuration-save-publish.png)
+
+---
+
+The maker portal can be used to add the control to the form with online environments.
+![Modern property configuration](./res/configuration-properties-modern.png)
