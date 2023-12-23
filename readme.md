@@ -12,6 +12,7 @@ A PCF control to manage security role assignment for a User or Team on the form 
 ### Docs
 - [Installation and Configuration](docs/installation-and-configuration.md)
 - [Migration from V1 to V2](docs/migration-v1-v2.md)
+- [Development](docs/development.md)
 
 ---
 
