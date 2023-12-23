@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "businessunit",
+    "businessunitdata",
     "businessunitid",
     "businessunits",
     "entityid",
@@ -11,6 +12,7 @@
     "retrieveall",
     "roleid",
     "securityrolemanager",
+    "securityroleservice",
     "solutionimport",
     "systemuserid",
     "systemuserroles",

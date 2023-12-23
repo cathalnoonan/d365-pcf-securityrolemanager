@@ -9,30 +9,30 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      # https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables
+      DOTNET_ROLL_FORWARD: Major
+      DOTNET_NOLOGO: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: control/package-lock.json
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
 
-      # Build solution
-      # - https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables
       - run: dotnet build
-        env:
-          DOTNET_ROLL_FORWARD: Major
-          DOTNET_NOLOGO: 1
-          DOTNET_CLI_TELEMETRY_OPTOUT: 1
-          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      - run: dotnet test --no-build
 
       # Prepare artifact(s)
       # - Create an arbitrary file in the root of the dist directory.
       # - This is to try and make it clearer that there is a nested zip inside the artifact zip file.
       - run: echo "${{ github.server_url }}/${{ github.repository }}" > ./dist/repo-url.txt
       - name: 'Upload artifact'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.repository.name }}__extract_this_zip
           path: ./dist/*
@@ -73,7 +73,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - name: Setup editorconfig-checker

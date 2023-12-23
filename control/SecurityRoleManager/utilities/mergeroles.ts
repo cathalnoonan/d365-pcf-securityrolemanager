@@ -16,7 +16,7 @@ export interface SecurityRoleMap extends SecurityRole {
     isAssigned: boolean
 }
 
-function updateArrayElement<T>(array: T[], predicate: (item: T) => boolean, updateToApply: (currentValue: T) => T) {
+export function updateArrayElement<T>(array: T[], predicate: (item: T) => boolean, updateToApply: (currentValue: T) => T) {
     // Find ...
     const index = array.findIndex(predicate)
 

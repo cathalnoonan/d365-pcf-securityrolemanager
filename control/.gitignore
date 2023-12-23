@@ -23,3 +23,6 @@
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Jest creates a coverage folder
+coverage/
