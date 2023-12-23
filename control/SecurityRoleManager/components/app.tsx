@@ -19,10 +19,11 @@ export interface IAppProps {
     businessUnitId: string | null
     businessUnitName: string | null
     crossBusinessUnitAssignmentEnabled: boolean
+    roleNamesFilter: string[]
 }
 
 export function App(props: IAppProps) {
-    const { apiDataUrl, resourceStrings, etn, crossBusinessUnitAssignmentEnabled, businessUnitId } = props
+    const { apiDataUrl, resourceStrings, etn, crossBusinessUnitAssignmentEnabled, businessUnitId, roleNamesFilter } = props
     const id = props.id?.toString()
 
     const xrmHttp = new XrmHttpService(apiDataUrl)
@@ -33,7 +34,8 @@ export function App(props: IAppProps) {
         id!,
         props.resourceStrings,
         crossBusinessUnitAssignmentEnabled,
-        businessUnitId!
+        businessUnitId!,
+        roleNamesFilter
     )
 
     const isSupportedEntity = (etn === 'systemuser' || etn === 'team')
@@ -94,7 +96,7 @@ export function App(props: IAppProps) {
             }
         }
         getData()
-    }, [props.businessUnitId, props.id])
+    }, [props.businessUnitId, props.id, roleNamesFilter])
 
     // Show spinner while loading
     if (!loaded) return (

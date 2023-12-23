@@ -1,10 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest>
   <control namespace="Cathal" constructor="SecurityRoleManager" display-name-key="SecurityRoleManager" description-key="SecurityRoleManager_description" control-type="standard" preview-image="preview.png" version="2.0.2">
     <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type-group="any" usage="bound" required="true" />
     <property name="entityId" display-name-key="entityId_Display_Key" description-key="entityId_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="entityLogicalName" display-name-key="entityLogicalName_Display_Key" description-key="entityLogicalName_Desc_Key" of-type="SingleLine.Text" usage="input" required="true" />
     <property name="businessUnitId" display-name-key="businessUnitId_Display_Key" description-key="businessUnitId_Desc_Key" of-type="Lookup.Simple" usage="bound" required="true" />
+    <property name="roleNamesFilter" display-name-key="roleNamesFilter_Display_Key" description-key="roleNamesFilter_Desc_Key" of-type="Multiple" usage="input" required="false" />
     <type-group name="any">
       <type>Currency</type>
       <type>DateAndTime.DateAndTime</type>

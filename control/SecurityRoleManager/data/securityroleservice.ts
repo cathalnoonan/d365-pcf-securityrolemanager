@@ -10,7 +10,8 @@ export class SecurityRoleService {
         private readonly id: string,
         private readonly resourceStrings: ResourceStrings,
         private readonly crossBusinessUnitAssignmentEnabled: boolean,
-        private readonly businessUnitId: string
+        private readonly businessUnitId: string,
+        private readonly roleNamesFilter: string[]
     ) {
     }
 
@@ -35,9 +36,7 @@ export class SecurityRoleService {
     }
 
     private async retrieveAllRoles(): Promise<SecurityRole[]> {
-        let url = `roles?$select=name,roleid&$orderby=name asc&$expand=businessunitid($select=name,businessunitid)`
-        if (!this.crossBusinessUnitAssignmentEnabled)
-            url += `&$filter=_businessunitid_value eq '${this.businessUnitId}'`
+        const url = this.buildQueryToRetrieveRoles(this.crossBusinessUnitAssignmentEnabled, this.roleNamesFilter)
 
         const roles: any[] = await retrieveAll(this.httpService, url)
 
@@ -46,10 +45,46 @@ export class SecurityRoleService {
             name: `${entity.name} - ${entity.businessunitid.name}`,
             businessUnitId: entity.businessunitid.businessunitid,
         }))
-        .sort((a, b) => a.name > b.name ? 1 : -1) // Ordering by the business unit name
+        .sort((a, b) => a.name > b.name ? 1 : -1) // Ordering by the roll name with business unit name at the end
     }
 
-    private async retrieveAssignedRoles(): Promise<SecurityRole[]> {
+    public buildQueryToRetrieveRoles(isCrossBusinessUnitEnabled: boolean, filterRoleNames: string[]): string {
+        let url = `roles?$select=name,roleid&$orderby=name asc&$expand=businessunitid($select=name,businessunitid)`
+
+        const roleNamesFilter = this.createRoleNameFilter(filterRoleNames)
+
+        if (isCrossBusinessUnitEnabled) {
+            if (roleNamesFilter) {
+                url += `&$filter=${roleNamesFilter}`
+            }
+        }
+        else {
+            url += `&$filter=_businessunitid_value eq '${this.businessUnitId}'`
+            if (roleNamesFilter) {
+                url += ` and ${roleNamesFilter}`
+            }
+        }
+
+        return url
+    }
+
+    public createRoleNameFilter(roleNames: string[]): string {
+        // Tidy up the input
+        roleNames = roleNames
+            .map(roleName => roleName?.trim())
+            .filter(roleName => roleName)
+
+        if (roleNames.length === 0) {
+            return ''
+        }
+
+        const criteria = roleNames
+            .map(roleName => `name eq '${roleName}'`)
+            .join(' or ')
+        return `(${criteria})`
+    }
+
+    public async retrieveAssignedRoles(): Promise<SecurityRole[]> {
         const url = this.createRetrieveUrlForTargetRoles()
         const results = await retrieveAll(this.httpService, url)
 
@@ -60,7 +95,7 @@ export class SecurityRoleService {
         }))
     }
 
-    private createRetrieveUrlForTargetRoles(): string {
+    public createRetrieveUrlForTargetRoles(): string {
         const { etn, id } = this
         const intersectEntityName = this.getIntersectEntityName()
 
@@ -85,7 +120,7 @@ export class SecurityRoleService {
         return `roles?fetchXml=${fetch}`
     }
 
-    private createAssociateUrl(): string {
+    public createAssociateUrl(): string {
         const { id } = this
         const entitySetName = this.getEntitySetName()
         const relationshipName = this.getIntersectEntitySetName()
@@ -93,7 +128,7 @@ export class SecurityRoleService {
         return `${entitySetName}(${this.handleId(id)})/${relationshipName}/$ref`
     }
 
-    private createDissociateUrl(roleId: string): string {
+    public createDissociateUrl(roleId: string): string {
         const { id } = this
         const entitySetName = this.getEntitySetName()
         const relationshipName = this.getIntersectEntitySetName()
@@ -101,13 +136,13 @@ export class SecurityRoleService {
         return `${entitySetName}(${this.handleId(id)})/${relationshipName}(${this.handleId(roleId)})/$ref`
     }
 
-    private createRoleAssociationObject(roleId: string): any {
+    public createRoleAssociationObject(roleId: string): any {
         return {
             '@odata.id': `${this.apiDataUrl}roles(${this.handleId(roleId)})`,
         }
     }
 
-    private getEntitySetName(): string {
+    public getEntitySetName(): string {
         if (this.etn === 'systemuser') return 'systemusers'
         if (this.etn === 'team') return 'teams'
 
@@ -116,7 +151,7 @@ export class SecurityRoleService {
         }
     }
 
-    private getIntersectEntityName(): string {
+    public getIntersectEntityName(): string {
         if (this.etn === 'systemuser') return 'systemuserroles'
         if (this.etn === 'team') return 'teamroles'
 
@@ -125,7 +160,7 @@ export class SecurityRoleService {
         }
     }
 
-    private getIntersectEntitySetName(): string {
+    public getIntersectEntitySetName(): string {
         if (this.etn === 'systemuser') return 'systemuserroles_association'
         if (this.etn === 'team') return 'teamroles_association'
 
@@ -134,7 +169,10 @@ export class SecurityRoleService {
         }
     }
 
-    private handleId(id: string): string {
+    public handleId(id: string): string {
+        if (!id) {
+            return id
+        }
         return id.replace('{', '').replace('}', '')
     }
 }

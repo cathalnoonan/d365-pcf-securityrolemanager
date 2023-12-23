@@ -3,6 +3,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { App, IAppProps } from './components/app'
 import { ResourceStrings } from './strings'
+import { parseCsvString } from './utilities'
 
 export class SecurityRoleManager implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
@@ -26,6 +27,11 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
 
         const businessUnit = context.parameters.businessUnitId.raw?.[0]
 
+        const roleNamesFilter = parseCsvString(
+          context.parameters.roleNamesFilter.raw ?? '',
+          '\n'
+        )
+
         const props: IAppProps = {
             apiDataUrl,
             resourceStrings,
@@ -34,6 +40,7 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
             businessUnitId: businessUnit?.id,
             businessUnitName: businessUnit?.name ?? null,
             crossBusinessUnitAssignmentEnabled: isCrmOnline,
+            roleNamesFilter,
         }
 
         ReactDOM.render(

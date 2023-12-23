@@ -1,3 +1,4 @@
 {
-  "outDir": "./out/controls"
+  "outDir": "./out/controls",
+  "buildMode": "production"
 }

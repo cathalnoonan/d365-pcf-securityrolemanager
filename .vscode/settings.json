@@ -8,6 +8,7 @@
     "entitylogicalname",
     "isdisabled",
     "mergeroles",
+    "parsecsvstring",
     "resourcestrings",
     "retrieveall",
     "roleid",

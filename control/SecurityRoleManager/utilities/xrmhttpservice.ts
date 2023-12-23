@@ -1,8 +1,10 @@
 export class XrmHttpService {
     constructor (
-        private readonly apiUrl: string
+        public readonly apiUrl: string
     ) {
-        if (!this.apiUrl.endsWith('/')) this.apiUrl += '/'
+        if (!this.apiUrl.endsWith('/')) {
+          this.apiUrl += '/'
+        }
     }
 
     public async GET<T = any>(partialUrl: string): Promise<T> {
@@ -56,8 +58,12 @@ export class XrmHttpService {
                 })
             }
 
-            if (data) xhr.send(JSON.stringify(data))
-            else xhr.send()
+            if (data) {
+              xhr.send(JSON.stringify(data))
+            }
+            else {
+              xhr.send()
+            }
         })
     }
 }
