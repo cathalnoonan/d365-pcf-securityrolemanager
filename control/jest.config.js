@@ -1,4 +1,13 @@
+// @ts-check
+
+/**
+ * @type { import('jest').Config }
+ */
 module.exports = {
+  collectCoverageFrom: [
+    "**/*.{ts,tsx}",
+    "!**/node_modules/",
+  ],
   preset: "ts-jest",
   testEnvironment: "jsdom",
   transform: {
