@@ -1,7 +1,11 @@
 # Development
 Building the control will require use of the command line.
 
-## Prerequisites
+There are two approaches to developing for this project:
+- Local machine development
+- Dev container development
+
+## Local Machine Development Prerequisites
 
 ### .NET 6
 Check if .NET 6 is installed by running the command:
@@ -27,6 +31,16 @@ Validate that the node version being used by running:
 node --version
 ```
 
+## Dev Container Development Prerequisites
+
+The [devcontainer.json](../.devcontainer/devcontainer.json) file includes to NodeJS and .NET.
+
+- Docker
+- [Visual Studio Code](https://code.visualstudio.com/download)
+- [Dev Containers (Visual Studio Code plugin)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+After cloning the repository, open the repo in vscode, then select the option to re-open in container.
+
 ---
 
 ## Building from source
@@ -41,7 +55,7 @@ The managed solution can be imported into your CRM environment.
 
 ---
 
-## Local development
+## PCF Test Harness
 The pcf test harness can be started by running the following commands:
 ```sh
 cd ./control
@@ -71,4 +85,11 @@ You can close the browser tab that opened `http://localhost:8181` if desired.
 Unit tests can be run locally by running the following command from the root of the repository:
 ```sh
 dotnet test
+```
+
+Alternatively, the tests can be run via npm commands if preferred:
+```sh
+cd ./control
+npm install
+npm run test
 ```
