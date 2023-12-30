@@ -7,7 +7,7 @@
         "clean": "pcf-scripts clean",
         "rebuild": "pcf-scripts rebuild",
         "start": "pcf-scripts start watch",
-        "test": "jest --collectCoverage"
+        "test": "jest --collectCoverage --coverageDirectory ../dist/coverage"
     },
     "dependencies": {
         "@fluentui/react": "^8.111.2",
