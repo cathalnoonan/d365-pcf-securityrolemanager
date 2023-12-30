@@ -24,5 +24,6 @@
     // Mount a volume for the node_modules, it improves performance significantly
     "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/control/node_modules,type=volume"
   ],
-  "forwardPorts": [8181]
+  "forwardPorts": [8181],
+  "postStartCommand": "sudo chown -R $USER:$USER ./control/node_modules"
 }
