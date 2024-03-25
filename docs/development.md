@@ -31,7 +31,7 @@ Validate that the node version being used by running:
 node --version
 ```
 
-## Dev Container Development Prerequisites
+## Dev Container Development Prerequisites
 
 The [devcontainer.json](../.devcontainer/devcontainer.json) file includes to NodeJS and .NET.
 
