@@ -1,0 +1,62 @@
+name: Draft release
+run-name: ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - v**
+
+env:
+  DOTNET_ROLL_FORWARD: Major
+  DOTNET_NOLOGO: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+permissions:
+  contents: write
+
+jobs:
+  draft_release:
+    name: Draft release
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: control/package-lock.json
+      - uses: actions/setup-dotnet@v4
+      - name: Install zip
+        shell: bash
+        run: |
+          if ! command -v zip &> /dev/null
+          then
+            sudo apt -y update
+            sudo apt -y install zip
+          fi
+
+      # Configure environment variables
+      - name: "Configure: Version"
+        run: echo "Version=${GITHUB_REF##*/v}" >> $GITHUB_ENV
+
+      # Version the solution
+      - run: dotnet msbuild -t:SetVersion -p:NewVersion=${{ env.Version }}
+
+      # Build solution
+      - run: dotnet build
+      - run: dotnet test --no-build
+
+      # Zip code coverage
+      - run: |
+          if test -d ./dist/coverage
+          then
+            (cd ./dist && zip -r ./coverage.zip ./coverage)
+          fi
+
+      # Create draft release
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: dist/*.zip
