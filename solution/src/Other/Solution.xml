@@ -5,7 +5,7 @@
     <UniqueName>SecurityRoleManager</UniqueName>
     <LocalizedNames>
       <!-- Localized Solution Name in language code -->
-      <LocalizedName description="Security Role Manager" languagecode="1033" />
+      <LocalizedName description="Security Role Manager. https://github.com/cathalnoonan/d365-pcf-securityrolemanager" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
     <Version>2.1.0</Version>
