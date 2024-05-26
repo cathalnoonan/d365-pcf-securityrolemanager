@@ -7,14 +7,14 @@ There are two approaches to developing for this project:
 
 ## Local Machine Development Prerequisites
 
-### .NET 6
-Check if .NET 6 is installed by running the command:
+### .NET 8
+Check if .NET 8 is installed by running the command:
 ```sh
 dotnet --list-sdks
 ```
-- If a version starting with `6.0` is listed, then dotnet 6 is installed.
+- If a version starting with `8.0` is listed, then dotnet 8 is installed.
 - Download from the Microsoft website here:
-    https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+    https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 
 ### Node JS
 Rather than installing Node JS directly, using a node version manager is recommended. This will make it easier to switch between node versions for different projects.
@@ -33,7 +33,7 @@ node --version
 
 ## Dev Container Development Prerequisites
 
-The [devcontainer.json](../.devcontainer/devcontainer.json) file includes to NodeJS and .NET.
+The [devcontainer.json](../.devcontainer/devcontainer.json) file includes NodeJS and .NET.
 
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/download)
