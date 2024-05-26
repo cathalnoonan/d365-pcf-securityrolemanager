@@ -1,0 +1,22 @@
+name: devcontainer
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/devcontainer.yml"
+      - "compose.yml"
+
+jobs:
+  devcontainer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v4
+      - name: "Test: Build and run dev container"
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: dotnet build
+          push: never

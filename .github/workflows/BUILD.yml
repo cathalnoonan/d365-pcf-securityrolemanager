@@ -26,13 +26,15 @@ jobs:
           cache-dependency-path: control/package-lock.json
       - name: "Setup: dotnet"
         uses: actions/setup-dotnet@v4
+      - name: "Build: dotnet restore"
+        run: dotnet restore
       - name: "Build: dotnet build"
-        run: dotnet build
+        run: dotnet build --no-restore
       - name: "Build: dotnet test"
         run: dotnet test --no-build
       - name: "Artifacts: Create file containing URL of repo"
         run: echo "${{ github.server_url }}/${{ github.repository }}" > ./dist/repo-url.txt
-      - name: "Release: Upload artifact"
+      - name: "Artifacts: Upload artifact"
         uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.repository.name }}__extract_this_zip
