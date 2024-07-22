@@ -1,0 +1,23 @@
+name: EditorConfig Checker
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  validate-editor-config:
+    name: Validate editor config
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v4
+      - name: "Setup: Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: "Setup: editorconfig-checker"
+        run: npm i -g editorconfig-checker
+      - name: "Validate: Run editorconfig-checker"
+        run: editorconfig-checker

@@ -7,7 +7,7 @@ on:
     paths:
       - ".devcontainer/**"
       - ".github/workflows/devcontainer.yml"
-      - "compose.yml"
+  pull_request:
 
 jobs:
   devcontainer:
