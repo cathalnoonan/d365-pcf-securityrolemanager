@@ -1,0 +1,44 @@
+name: Validate RESX Files
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/validate-resx-files.yml"
+      - "**/*.resx"
+  pull_request:
+
+jobs:
+  validate-resx-files:
+    name: Validate resx files
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v4
+      - name: "Setup: xmllint"
+        run: |
+          if ! command -v xmllint &> /dev/null
+          then
+            sudo apt-get update
+            sudo apt-get install -y libxml2-utils
+          fi
+        shell: bash
+      - name: "Validate: Check resx files contain valid xml"
+        run: |
+          shopt -s globstar
+          error=0
+          for resx_file in $(/bin/ls ./**/*.resx)
+          do
+            if xmllint --noout "$resx_file" > /dev/null 2>&1 ;
+            then
+              echo "Valid: $resx_file"
+            else
+              echo "Invalid: $resx_file" && error=1
+            fi
+          done
+          if [[ "${error}" == "0" ]]
+          then
+            exit 1
+          fi
+        shell: bash
