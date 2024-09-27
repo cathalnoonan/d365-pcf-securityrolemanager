@@ -34,7 +34,8 @@
   - Select `Security Role Manager` under the Add Control option.
   ![Select Security Role Manager](./res/configuration-select-securityrolemanager.png)
   - Configure the input properties for the control:
-  ![Configure the input properties for the control](./res/configuration-properties.png)
+  ![Configure the input properties for the control (1)](./res/configuration-properties-1.png)
+  ![Configure the input properties for the control (2)](./res/configuration-properties-2.png)
     - EntityId:
       - For `systemuser`, select the `systemuserid` field
       - For `team`, select the `teamid` field
@@ -48,8 +49,13 @@
     - RoleNamesFilter (optional, added in `v2.1.0`):
       - If you would like to filter the list of roles that are shown on the form, enter the names of roles to be shown.
       - Select `Bind to a static value`, type each security role name on a new line. Using the [maker portal](#maker-portal) will have a multi-line text box for updating the role names.
-      - **Note: The names must match with security role names. If roles are renamed elsewhere, they must be updated here also.**
+      - **Note: The names must match with security role names. If roles are renamed elsewhere, they must be updated here also or the filtering will not pick up that role anymore.**
       ![Role Names Filter](./res/configuration-properties-rolenamesfilter.png)
+    - RoleNamesFilterDelimiter (optional, added in `v2.2.0`):
+      - If you need to specify the character used to separate `RoleNamesFilter`, provide the delimiter (otherwise a new line will be used).
+      - Select `Bind to a static value`, type the character to use.
+      - **Note: Make sure that the character used to separate the role names does not exist in any of the security roles in your environment.**
+      ![Role Names Filter](./res/configuration-properties-rolenamesfilterdelimiter.png)
 - Save, Publish, Refresh the form.
 ![Save, Publish, Refresh the form](./res/configuration-save-publish.png)
 
