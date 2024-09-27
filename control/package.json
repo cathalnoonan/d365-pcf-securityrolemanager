@@ -1,6 +1,6 @@
 {
     "name": "d365-pcf-securityrolemanager",
-    "version": "2.1.1",
+    "version": "2.2.0",
     "description": "D365 - PCF - Security Role Manager",
     "scripts": {
         "build": "pcf-scripts build",
