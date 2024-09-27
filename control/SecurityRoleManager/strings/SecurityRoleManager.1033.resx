@@ -99,6 +99,12 @@
     <data name="roleNamesFilter_Desc_Key" xml:space="preserve">
         <value>Specify a list of roles to include on the form. Enter each role name on a new line. Note: If the role names are updated, they must also be changed here.</value>
     </data>
+    <data name="roleNamesFilterDelimiter_Display_Key" xml:space="preserve">
+        <value>Role Names Filter Delimiter</value>
+    </data>
+    <data name="roleNamesFilterDelimiter_Desc_Key" xml:space="preserve">
+        <value>Character used to separate the list of security roles being filtered. Make sure to use a character that is not in the security role names that exist in your environment.</value>
+    </data>
     <data name="SecurityRoles" xml:space="preserve">
         <value>Security Roles</value>
     </data>

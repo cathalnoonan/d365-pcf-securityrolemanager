@@ -27,9 +27,10 @@ export class SecurityRoleManager implements ComponentFramework.StandardControl<I
 
         const businessUnit = context.parameters.businessUnitId.raw?.[0]
 
+        const roleNamesFilterDelimiter = context.parameters.roleNamesFilterDelimiter.raw ?? ''
         const roleNamesFilter = parseCsvString(
-          context.parameters.roleNamesFilter.raw ?? '',
-          '\n'
+            context.parameters.roleNamesFilter.raw ?? '',
+            roleNamesFilterDelimiter.length > 0 ? roleNamesFilterDelimiter : '\n'
         )
 
         const props: IAppProps = {
