@@ -54,4 +54,11 @@ describe('parseCsvString', () => {
         const result = parseCsvString(str, '\n')
         expect(result).toStrictEqual(['Hello', 'World'])
     })
+
+    it('should parse array containing new line, when comma is used as separator', () => {
+      const str = `Hello,
+      World`
+      const result = parseCsvString(str, ',')
+      expect(result).toStrictEqual(['Hello', 'World'])
+  })
 })
