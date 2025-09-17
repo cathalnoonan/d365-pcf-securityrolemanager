@@ -18,15 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Setup: Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: "Setup: Node"
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: control/package-lock.json
       - name: "Setup: dotnet"
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
       - name: "Build: dotnet restore"
         run: dotnet restore
       - name: "Build: dotnet build"
